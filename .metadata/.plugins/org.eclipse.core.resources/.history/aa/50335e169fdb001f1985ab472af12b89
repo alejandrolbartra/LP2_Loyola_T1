@@ -1,0 +1,91 @@
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+
+public class Menu extends JDialog implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
+	private final JPanel contentPanel = new JPanel();
+	private JButton okButton;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			Menu dialog = new Menu();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public Menu() {
+		setBounds(100, 100, 450, 300);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setLayout(null);
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		{
+			JLabel lblNewLabel = new JLabel("MENU PRINCIPAL");
+			lblNewLabel.setBounds(156, 22, 131, 13);
+			contentPanel.add(lblNewLabel);
+		}
+		{
+			JButton btnNewButton = new JButton("Crear producto");
+			btnNewButton.setBounds(156, 45, 85, 21);
+			contentPanel.add(btnNewButton);
+		}
+		{
+			JButton btnNewButton_1 = new JButton("Actualizar producto");
+			btnNewButton_1.setBounds(156, 76, 85, 21);
+			contentPanel.add(btnNewButton_1);
+		}
+		{
+			JButton btnNewButton_2 = new JButton("Eliminar producto");
+			btnNewButton_2.setBounds(156, 107, 85, 21);
+			contentPanel.add(btnNewButton_2);
+		}
+		{
+			JButton btnNewButton_3 = new JButton("Listar producto");
+			btnNewButton_3.setBounds(156, 138, 85, 21);
+			contentPanel.add(btnNewButton_3);
+		}
+		{
+			JPanel buttonPane = new JPanel();
+			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			{
+				okButton = new JButton("OK");
+				okButton.addActionListener(this);
+				okButton.setActionCommand("OK");
+				buttonPane.add(okButton);
+				getRootPane().setDefaultButton(okButton);
+			}
+			{
+				JButton cancelButton = new JButton("Cancel");
+				cancelButton.setActionCommand("Cancel");
+				buttonPane.add(cancelButton);
+			}
+		}
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == okButton) {
+			actionPerformedOkButton(e);
+		}
+	}
+	protected void actionPerformedOkButton(ActionEvent e) {
+	}
+}

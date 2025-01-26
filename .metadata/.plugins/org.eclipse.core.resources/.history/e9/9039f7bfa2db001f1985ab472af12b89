@@ -1,0 +1,121 @@
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
+public class Menu extends JDialog implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
+	private final JPanel contentPanel = new JPanel();
+	private JButton okButton;
+	private JButton BtnRegistrar;
+	private JButton btnActualizar;
+	private JButton btnEliminar;
+	private JButton btnListar;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			Menu dialog = new Menu();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public Menu() {
+		setBounds(100, 100, 450, 300);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setLayout(null);
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		{
+			JLabel lblNewLabel = new JLabel("MENU PRINCIPAL");
+			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			lblNewLabel.setBounds(156, 22, 164, 13);
+			contentPanel.add(lblNewLabel);
+		}
+		{
+			BtnRegistrar = new JButton("Registrar producto");
+			BtnRegistrar.addActionListener(this);
+			BtnRegistrar.setBounds(156, 45, 164, 21);
+			contentPanel.add(BtnRegistrar);
+		}
+		{
+			btnActualizar = new JButton("Actualizar producto");
+			btnActualizar.addActionListener(this);
+			btnActualizar.setBounds(156, 76, 164, 21);
+			contentPanel.add(btnActualizar);
+		}
+		{
+			btnEliminar = new JButton("Eliminar producto");
+			btnEliminar.addActionListener(this);
+			btnEliminar.setBounds(156, 107, 164, 21);
+			contentPanel.add(btnEliminar);
+		}
+		{
+			btnListar = new JButton("Listar producto");
+			btnListar.addActionListener(this);
+			btnListar.setBounds(156, 138, 164, 21);
+			contentPanel.add(btnListar);
+		}
+		{
+			JPanel buttonPane = new JPanel();
+			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			{
+				okButton = new JButton("OK");
+				okButton.addActionListener(this);
+				okButton.setActionCommand("OK");
+				buttonPane.add(okButton);
+				getRootPane().setDefaultButton(okButton);
+			}
+			{
+				JButton cancelButton = new JButton("Cancel");
+				cancelButton.setActionCommand("Cancel");
+				buttonPane.add(cancelButton);
+			}
+		}
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnListar) {
+			actionPerformedBtnListar(e);
+		}
+		if (e.getSource() == btnEliminar) {
+			actionPerformedBtnEliminar(e);
+		}
+		if (e.getSource() == btnActualizar) {
+			actionPerformedBtnActualizar(e);
+		}
+		if (e.getSource() == BtnRegistrar) {
+			actionPerformedBtnRegistrar(e);
+		}
+		if (e.getSource() == okButton) {
+			actionPerformedOkButton(e);
+		}
+	}
+	protected void actionPerformedOkButton(ActionEvent e) {
+	}
+	protected void actionPerformedBtnRegistrar(ActionEvent e) {
+	}
+	protected void actionPerformedBtnActualizar(ActionEvent e) {
+	}
+	protected void actionPerformedBtnEliminar(ActionEvent e) {
+	}
+	protected void actionPerformedBtnListar(ActionEvent e) {
+	}
+}

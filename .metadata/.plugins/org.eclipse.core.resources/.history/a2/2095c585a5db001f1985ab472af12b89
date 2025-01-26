@@ -1,0 +1,105 @@
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
+
+import Producto.Producto;
+import Repositorio.Repositorio;
+
+public class Listar extends JDialog {
+
+    private static final long serialVersionUID = 1L;
+    private final JPanel contentPanel = new JPanel();
+    private JTable table;
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        try {
+            Listar dialog = new Listar();
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dialog.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Create the dialog.
+     */
+    public Listar() {
+        setBounds(100, 100, 600, 400);  // Ajusta el tamaño del diálogo
+        getContentPane().setLayout(new BorderLayout());
+        contentPanel.setLayout(null);
+        contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        getContentPane().add(contentPanel, BorderLayout.CENTER);
+        {
+            JLabel lblNewLabel = new JLabel("Lista de productos");
+            lblNewLabel.setBounds(250, 20, 137, 13);
+            contentPanel.add(lblNewLabel);
+        }
+        
+        // Crear la tabla y el modelo de tabla con los nombres de las columnas
+        public DefaultTableModel model;
+        model = new DefaultTableModel(
+                new String[] {"ID", "Nombre", "Precio", "Descripción", "Estado", "Fabricado", "Vence"},
+                0 // Número de filas iniciales
+            );
+        
+        table = new JTable(model);
+        
+        // Agregar la tabla a un JScrollPane
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(50, 60, 500, 186);
+        contentPanel.add(scrollPane);
+        
+        cargarDatos();
+        
+        {
+            JPanel buttonPane = new JPanel();
+            buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+            getContentPane().add(buttonPane, BorderLayout.SOUTH);
+            {
+                JButton okButton = new JButton("OK");
+                okButton.setActionCommand("OK");
+                buttonPane.add(okButton);
+                getRootPane().setDefaultButton(okButton);
+            }
+            {
+                JButton cancelButton = new JButton("Cancel");
+                cancelButton.setActionCommand("Cancel");
+                buttonPane.add(cancelButton);
+            }
+        }
+    }
+
+	private void cargarDatos() {
+		// TODO Auto-generated method stub
+		Repositorio repositorio = new Repositorio();
+        List<Producto> productos = repositorio.listarProductos();
+
+        // Limpiar el modelo de la tabla antes de agregar datos
+        model.setRowCount(0);
+
+        // Iterar sobre los productos y agregarlos al modelo
+        for (Producto producto : productos) {
+            model.addRow(new Object[] {
+                producto.getIdproductot1(),
+                producto.getNombret1(),
+                producto.getPreciot1(),
+                producto.getDescripciont1(),
+                producto.getEstadot1(),
+                producto.getFechafabrit1(),
+                producto.getFechavencimt1()
+            });
+	}
+}
